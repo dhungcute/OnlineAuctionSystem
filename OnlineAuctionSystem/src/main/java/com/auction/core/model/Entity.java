@@ -1,13 +1,14 @@
 package com.auction.core.model;
-import com.auction.core.util.TimeSyncManager;
 
-import java.sql.Time;
+import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import java.time.LocalDateTime;
+
 public abstract class Entity {
     private final String id;
+
     protected final LocalDateTime createdAt;
+
     public Entity() {
         this.id=UUID.randomUUID().toString();
         this.createdAt= TimeSyncManager.getNow();
@@ -22,5 +23,4 @@ public abstract class Entity {
     public LocalDateTime getCreatedAt(){
         return createdAt;
     }
-
 }
