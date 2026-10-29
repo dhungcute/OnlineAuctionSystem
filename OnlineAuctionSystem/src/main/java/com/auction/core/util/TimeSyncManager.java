@@ -1,9 +1,7 @@
 package com.auction.core.util;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-
 public class TimeSyncManager {
 
     private static long syncServerTimeMillis = 0;
