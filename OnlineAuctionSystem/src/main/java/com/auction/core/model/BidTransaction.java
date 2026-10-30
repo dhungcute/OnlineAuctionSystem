@@ -1,0 +1,33 @@
+package com.auction.core.model;
+
+import com.auction.core.util.TimeSyncManager;
+import java.time.LocalDateTime;
+
+//Đại diện cho 1 giao dịch cụ thể
+public class BidTransaction extends Entity {
+    private Bidder bidder;
+    private Auction auction;
+    private double amount;
+    private LocalDateTime timestamp;
+
+    public BidTransaction(String id, LocalDateTime createdAt, Bidder bidder, Auction auction, double amount) {
+        super(id, createdAt);
+        this.bidder = bidder;
+        this.auction = auction;
+        this.amount = amount;
+
+        this.timestamp = (createdAt != null) ? createdAt : com.auction.core.util.TimeSyncManager.getNow();
+    }
+    public Bidder getBidder() {
+        return bidder;
+    }
+    public Auction getAuction() {
+        return auction;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+}
