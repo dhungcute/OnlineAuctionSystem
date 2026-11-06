@@ -10,21 +10,19 @@ public abstract class Entity {
     private final String id;
     protected final LocalDateTime createdAt;
 
-    // Khởi tạo một thực thể mới: tự động sinh ra một ID ngẫu nhiên không trùng lặp (UUID) và chốt thời gian tạo là thời điểm hiện tại.
+    // Khởi tạo một thực thể mới: tự động sinh ra 1 ID ngẫu nhiên không trùng lặp (UUID) và chốt thời gian tạo là thời điểm hiện tại.
     public Entity() {
         this.id = java.util.UUID.randomUUID().toString();
         this.createdAt = com.auction.core.util.TimeSyncManager.getNow();
     }
-    // Khởi tạo thực thể từ những dữ liệu đã có sẵn (load dữ liệu từ Database).
+    // Khởi tạo thực thể từ những dữ liệu có sẵn (load dữ liệu từ Database).
     public Entity(String id, LocalDateTime createdAt) {
         this.id = id;
         this.createdAt = createdAt;
     }
-    // Lấy mã định danh duy nhất (ID) của thực thể. 
     public String getId() {
         return id;
     }
-    // Lấy thời điểm thực thể được tạo ra.
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
