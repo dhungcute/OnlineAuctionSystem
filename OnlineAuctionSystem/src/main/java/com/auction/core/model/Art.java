@@ -18,17 +18,14 @@ public class Art extends Item{
         super(id,createdAt,name,description,startingPrice,owner);
         this.artistName=artistName;
     }
-    // Trả về thông tin đặc thù của danh mục (Tên họa sĩ).
     @Override
     public String getCategoryInfo(){
         return "Họa sĩ: "+artistName;
     }
-    // Phân loại nhóm sản phẩm, trả về tên danh mục là "Nghệ thuật".
     @Override
     public String getCategory(){
         return "Nghệ thuật";
     }
-    // Lấy tên của họa sĩ sáng tác tác phẩm.
     public String getArtistName(){
         return artistName;
     }
