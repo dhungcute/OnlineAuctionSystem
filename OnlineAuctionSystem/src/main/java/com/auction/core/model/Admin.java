@@ -11,7 +11,6 @@ public class Admin extends User {
     public Admin(String id, LocalDateTime createdAt, String username, String password) {
         super(id, createdAt, username, password);
     }
-    // Trả về chuỗi "Admin" để hệ thống nhận diện quyền hạn phân quyền của người dùng.
     @Override
     public String getRole() { return "Admin"; }
 }
