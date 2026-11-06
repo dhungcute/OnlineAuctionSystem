@@ -50,17 +50,14 @@ public class Auction extends Entity implements Subject {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-    // Thêm một người dùng/hệ thống vào danh sách theo dõi phiên đấu giá
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
-    // Xóa một người dùng/hệ thống khỏi danh sách theo dõi
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
-    // Gửi thông báo đến tất cả những người đang theo dõi khi có lượt trả giá mới
     @Override
     public void notifyObserver(BidTransaction newBid) {
         for (Observer o : observers)
@@ -113,51 +110,40 @@ public class Auction extends Entity implements Subject {
             throw new InvalidStatusException("Phiên đấu giá đã bị huỷ rồi.");
         status = AuctionStatus.CANCELED;
     }
-    // Lấy thông tin người bán
     public Seller getSeller() {
         return seller;
     }
-    // Lấy thông tin sản phẩm đấu giá
     public Item getItem() {
         return item;
     }
-    // Lấy trạng thái hiện tại của phiên
     public AuctionStatus getStatus() {
         return status;
     }
-    // Lấy thời gian bắt đầu
     public LocalDateTime getStartTime() {
         return startTime;
     }
-    // Lấy thời gian kết thúc
     public LocalDateTime getEndTime() {
         return endTime;
     }
-    // Cập nhật lại thời gian kết thúc
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-    // Lấy mức giá cao nhất hiện hành
     public double getHighestBid() {
         return highestBid;
     }
-    // Cập nhật mức giá cao nhất (thường dùng khi setup dữ liệu)
     public void setHighestBid(double highestBid) {
         this.highestBid = highestBid;
     }
-    // Cập nhật trạng thái phiên
     public void setStatus(AuctionStatus status) {
         this.status = status;
     }
-    // Cập nhật thời gian bắt đầu
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
-    // Lấy danh sách lịch sử trả giá (trả về bản sao để tránh bị chỉnh sửa lén từ bên ngoài)
     public List<BidTransaction> getBidHistory() {
         return new ArrayList<>(bidHistory);
     }
-    // Tiêm/Thêm một lượt trả giá trực tiếp vào danh sách (dùng cho tải dữ liệu hoặc test)
+    // Tiêm/Thêm một lượt trả giá trực tiếp vào danh sách (dùng cho tải dữ liệu, test)
     public void injectBid(BidTransaction bid) {
         bidHistory.add(bid);
     }
@@ -165,17 +151,14 @@ public class Auction extends Entity implements Subject {
     public void injectAutoBid(AutoBid autoBid) {
         autoBids.add(autoBid);
     }
-    // Lấy danh sách các cài đặt trả giá tự động
     public List<AutoBid> getAutoBids() {
         return new java.util.ArrayList<>(autoBids);
     }
-    // Lấy ra lượt trả giá chiến thắng (lượt cuối cùng trong lịch sử)
     public BidTransaction getWinner() {
         if (bidHistory.isEmpty())
             return null;
         return bidHistory.get(bidHistory.size() - 1);
     }
-    // Trả về tên trạng thái đã được dịch sang tiếng Việt để hiển thị lên màn hình
     public String getStatusDisplay() {
         return switch (status) {
             case UPCOMING, OPEN -> "Sắp diễn ra";
