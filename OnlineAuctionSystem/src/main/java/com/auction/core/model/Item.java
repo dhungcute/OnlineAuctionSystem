@@ -1,11 +1,15 @@
 package com.auction.core.model;
 import java.time.LocalDateTime;
+
+// LỚP TRỪU TƯỢNG (ABSTRACT) ĐẠI DIỆN CHO MẶT HÀNG ĐẤU GIÁ CƠ BẢN.
 public abstract class Item extends Entity{
     private String name;
     private String description;
     private double startingPrice;
     private User owner;
     private String imageUrl;
+
+// Khởi tạo một mặt hàng mới trên hệ thống.
     public Item(String name,String description,double startingPrice,User owner) {
         super();
         this.name=name;
@@ -14,6 +18,7 @@ public abstract class Item extends Entity{
         this.owner=owner;
         this.imageUrl="";
     }
+// Tái tạo lại mặt hàng từ dữ liệu đã có sẵn (khôi phục thông tin từ Database).
     public Item(String id,LocalDateTime createdAt,String name,String description,double startingPrice,User owner){
         super(id,createdAt);
         this.name=name;
