@@ -2,9 +2,11 @@ package com.auction.core.model;
 
 import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
-//Đại diện cho 1 giao dịch cụ thể
-public class BidTransaction extends Entity {
+public class BidTransaction extends Entity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Bidder bidder;
     private Auction auction;
     private double amount;
