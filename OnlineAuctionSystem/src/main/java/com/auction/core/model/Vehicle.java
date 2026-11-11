@@ -11,7 +11,7 @@ public class Vehicle extends Item{
         this.brand=brand;
     }
     // Khởi tạo nhanh mặt hàng xe cộ mới, mặc định thương hiệu là "Unknown Brand".
-    public Vehicle(String name,String description,double startignPrice,User owner){
+    public Vehicle(String name,String description,double startingPrice,User owner){
         this(name,description,startingPrice,owner,"Unknown Brand");
     }
     // Tái tạo lại mặt hàng xe cộ từ dữ liệu cũ (khôi phục từ Database).
