@@ -20,7 +20,6 @@ public class Auction extends Entity implements Subject {
     private List<BidTransaction> bidHistory = new CopyOnWriteArrayList<>();
     private List<AutoBid> autoBids = new CopyOnWriteArrayList<>();
     private transient List<Observer> observers = new CopyOnWriteArrayList<>();
-    private List<Observer> observers = new CopyOnWriteArrayList<>();
 
     // Khởi tạo phiên đấu giá nhanh với thời gian bắt đầu là hiện tại
     public Auction(Seller seller, Item item, LocalDateTime endTime) {
