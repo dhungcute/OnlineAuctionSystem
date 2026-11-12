@@ -11,8 +11,10 @@ public class FileAuctionDao {
 
     public FileAuctionDao() {
         this.memoryAuctions = DataStorageManager.loadFromFile(FILE_NAME);
+        for (Auction auction : this.memoryAuctions) {
+            auction.initTransientFields();
+        }
     }
-
     public synchronized List<Auction> getAll() {
         return memoryAuctions;
     }

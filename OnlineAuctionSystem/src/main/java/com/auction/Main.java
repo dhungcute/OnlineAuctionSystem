@@ -3,7 +3,7 @@ package com.auction;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import com.auction.ui.util.NavigationManager;
 import javafx.scene.image.Image;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +15,6 @@ public class Main extends Application {
     // Khởi tạo và thiết lập các thông số cơ bản cho cửa sổ giao diện chính
     @Override
     public void start(Stage stage) throws IOException {
-        stage.initStyle(StageStyle.UNDECORATED);
-
         try {
             InputStream iconStream = getClass().getResourceAsStream("/com/auction/images/logo.png");
             if (iconStream != null) {
