@@ -3,14 +3,20 @@ package com.auction.core.model;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+<<<<<<< HEAD
 //Lưu trữ cấu hình lệnh đặt giá tự động của ng dùng
 public class AutoBid implements Serializable {
+=======
+// LỚP LƯU TRỮ CẤU HÌNH LỆNH ĐẶT GIÁ TỰ ĐỘNG CỦA NGƯỜI DÙNG CHO MỘT PHIÊN ĐẤU GIÁ CỤ THỂ.
+public class AutoBid {
+>>>>>>> 9a19af50fea71423745a42caef91dda01e75785a
     private String id;
     private String auctionId;
     private String bidderId;
     private double maxBid;
     private LocalDateTime createdAt;
 
+    // Khởi tạo một cấu hình đặt giá tự động với đầy đủ thông tin chi tiết.
     public AutoBid(String id, String auctionId, String bidderId, double maxBid, LocalDateTime createdAt) {
         this.id = id;
         this.auctionId = auctionId;
@@ -18,6 +24,7 @@ public class AutoBid implements Serializable {
         this.maxBid = maxBid;
         this.createdAt = createdAt;
     }
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -31,6 +38,5 @@ public class AutoBid implements Serializable {
     public void setMaxBid(double maxBid) { this.maxBid = maxBid; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
-
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
