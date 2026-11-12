@@ -2,8 +2,6 @@ package com.auction.core.model;
 
 import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
-
-public class BidTransaction extends Entity {
 // Lớp đại diện cho 1 giao dịch cụ thể
 public class BidTransaction extends Entity {
     private Bidder bidder;
