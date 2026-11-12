@@ -2,12 +2,6 @@ package com.auction.core.model;
 
 import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
-<<<<<<< HEAD
-
-
-public class BidTransaction extends Entity {
-=======
->>>>>>> 9a19af50fea71423745a42caef91dda01e75785a
 
 // Lớp đại diện cho 1 giao dịch cụ thể
 public class BidTransaction extends Entity {
