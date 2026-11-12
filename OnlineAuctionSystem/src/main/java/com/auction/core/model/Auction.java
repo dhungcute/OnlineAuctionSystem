@@ -27,7 +27,7 @@ public class Auction extends Entity implements Subject {
 
     private List<AutoBid> autoBids = new CopyOnWriteArrayList<>();
 
-    private List<Observer> observers = new CopyOnWriteArrayList<>();
+    private transient List<Observer> observers = new CopyOnWriteArrayList<>();
 
     public Auction(Seller seller, Item item, LocalDateTime endTime) {
         this(seller, item, com.auction.core.util.TimeSyncManager.getNow(), endTime);
@@ -75,9 +75,9 @@ public class Auction extends Entity implements Subject {
             o.update(newBid);
     }
     public void approveAuction() throws InvalidStatusException {
-        if (this.status != AuctionStatus.PENDING && this.status != AuctionStatus.OPEN)
+        if (this.status != AuctionStatus.UPCOMING)
             throw new InvalidStatusException("Chỉ có thể duyệt phiên đang chờ. Trạng thái hiện tại: " + status);
-        status = AuctionStatus.UPCOMING;
+        status = AuctionStatus.OPEN;
     }
     public void startAuction() throws InvalidStatusException {
         goLive();
@@ -92,7 +92,7 @@ public class Auction extends Entity implements Subject {
     public synchronized void placeBid(BidTransaction newBid) throws InvalidBidException, InvalidStatusException {
         if (this.status != AuctionStatus.RUNNING)
             throw new InvalidStatusException("Phiên đấu giá chưa bắt đầu hoặc đã kết thúc.");
-        if (this.endTime != null && com.auction.core.util.TimeSyncManager.getNow().isAfter(this.endTime))
+        if (this.endTime != null && TimeSyncManager.getNow().isAfter(this.endTime))
             throw new InvalidStatusException("Phiên đấu giá đã kết thúc.");
         double newBidAmount = newBid.getAmount();
         double step = com.auction.core.util.BidLadderUtil.getIncrementForPrice(this.highestBid);
@@ -170,5 +170,10 @@ public class Auction extends Entity implements Subject {
             case CANCELED -> "Đã huỷ";
             default -> status.name();
         };
+    }
+    public void initTransientFields() {
+        if (this.observers == null) {
+            this.observers = new CopyOnWriteArrayList<>();
+        }
     }
 }

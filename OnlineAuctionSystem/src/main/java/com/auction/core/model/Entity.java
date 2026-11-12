@@ -3,8 +3,10 @@ package com.auction.core.model;
 import com.auction.core.util.TimeSyncManager;
 import java.util.UUID;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final String id;
     protected final LocalDateTime createdAt;
 

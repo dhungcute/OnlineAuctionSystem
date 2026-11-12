@@ -2,10 +2,9 @@ package com.auction.core.model;
 
 import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
-import java.io.Serializable;
 
-public class BidTransaction extends Entity implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+public class BidTransaction extends Entity {
 
     private Bidder bidder;
     private Auction auction;
@@ -18,7 +17,7 @@ public class BidTransaction extends Entity implements Serializable {
         this.auction = auction;
         this.amount = amount;
 
-        this.timestamp = (createdAt != null) ? createdAt : com.auction.core.util.TimeSyncManager.getNow();
+        this.timestamp = (createdAt != null) ? createdAt : TimeSyncManager.getNow();
     }
     public Bidder getBidder() {
         return bidder;
