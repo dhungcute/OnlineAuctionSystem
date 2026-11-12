@@ -2,6 +2,12 @@ package com.auction.core.model;
 
 import com.auction.core.util.TimeSyncManager;
 import java.time.LocalDateTime;
+<<<<<<< HEAD
+
+
+public class BidTransaction extends Entity {
+=======
+>>>>>>> 9a19af50fea71423745a42caef91dda01e75785a
 
 // Lớp đại diện cho 1 giao dịch cụ thể
 public class BidTransaction extends Entity {
@@ -16,7 +22,7 @@ public class BidTransaction extends Entity {
         this.auction = auction;
         this.amount = amount;
 
-        this.timestamp = (createdAt != null) ? createdAt : com.auction.core.util.TimeSyncManager.getNow();
+        this.timestamp = (createdAt != null) ? createdAt : TimeSyncManager.getNow();
     }
     public Bidder getBidder() {
         return bidder;

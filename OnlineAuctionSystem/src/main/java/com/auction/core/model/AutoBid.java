@@ -1,9 +1,15 @@
 package com.auction.core.model;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
+<<<<<<< HEAD
+//Lưu trữ cấu hình lệnh đặt giá tự động của ng dùng
+public class AutoBid implements Serializable {
+=======
 // LỚP LƯU TRỮ CẤU HÌNH LỆNH ĐẶT GIÁ TỰ ĐỘNG CỦA NGƯỜI DÙNG CHO MỘT PHIÊN ĐẤU GIÁ CỤ THỂ.
 public class AutoBid {
+>>>>>>> 9a19af50fea71423745a42caef91dda01e75785a
     private String id;
     private String auctionId;
     private String bidderId;

@@ -19,7 +19,12 @@ public class Auction extends Entity implements Subject {
     private double highestBid;
     private List<BidTransaction> bidHistory = new CopyOnWriteArrayList<>();
     private List<AutoBid> autoBids = new CopyOnWriteArrayList<>();
+<<<<<<< HEAD
+
+    private transient List<Observer> observers = new CopyOnWriteArrayList<>();
+=======
     private List<Observer> observers = new CopyOnWriteArrayList<>();
+>>>>>>> 9a19af50fea71423745a42caef91dda01e75785a
 
     // Khởi tạo phiên đấu giá nhanh với thời gian bắt đầu là hiện tại
     public Auction(Seller seller, Item item, LocalDateTime endTime) {
@@ -65,9 +70,9 @@ public class Auction extends Entity implements Subject {
     }
     // Quản trị viên duyệt phiên đấu giá, chuyển từ "Đang chờ" sang "Sắp diễn ra"
     public void approveAuction() throws InvalidStatusException {
-        if (this.status != AuctionStatus.PENDING && this.status != AuctionStatus.OPEN)
+        if (this.status != AuctionStatus.UPCOMING)
             throw new InvalidStatusException("Chỉ có thể duyệt phiên đang chờ. Trạng thái hiện tại: " + status);
-        status = AuctionStatus.UPCOMING;
+        status = AuctionStatus.OPEN;
     }
     // Kích hoạt bắt đầu phiên đấu giá
     public void startAuction() throws InvalidStatusException {
@@ -85,7 +90,7 @@ public class Auction extends Entity implements Subject {
     public synchronized void placeBid(BidTransaction newBid) throws InvalidBidException, InvalidStatusException {
         if (this.status != AuctionStatus.RUNNING)
             throw new InvalidStatusException("Phiên đấu giá chưa bắt đầu hoặc đã kết thúc.");
-        if (this.endTime != null && com.auction.core.util.TimeSyncManager.getNow().isAfter(this.endTime))
+        if (this.endTime != null && TimeSyncManager.getNow().isAfter(this.endTime))
             throw new InvalidStatusException("Phiên đấu giá đã kết thúc.");
         double newBidAmount = newBid.getAmount();
         double step = com.auction.core.util.BidLadderUtil.getIncrementForPrice(this.highestBid);
@@ -167,5 +172,10 @@ public class Auction extends Entity implements Subject {
             case CANCELED -> "Đã huỷ";
             default -> status.name();
         };
+    }
+    public void initTransientFields() {
+        if (this.observers == null) {
+            this.observers = new CopyOnWriteArrayList<>();
+        }
     }
 }
