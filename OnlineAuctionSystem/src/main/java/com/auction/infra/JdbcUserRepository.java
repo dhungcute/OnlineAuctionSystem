@@ -1,4 +1,4 @@
-package com.auction.infra.repository;
+package com.auction.infra;
 
 import com.auction.core.model.Bidder;
 import com.auction.core.model.User;
