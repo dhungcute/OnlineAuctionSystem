@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class JdbcAuctionRepository {
+public class FileAuctionRepository {
 
     private static final Path FILE_PATH = Paths.get("data", "auctions.dat");
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public JdbcAuctionRepository() {
+    public FileAuctionRepository() {
         try {
             Path parentDir = FILE_PATH.getParent();
             if (parentDir != null && !Files.exists(parentDir)) {
                 Files.createDirectories(parentDir);
             }
         } catch (IOException e) {
-            System.err.println("[JdbcAuctionRepository] Không thể tạo thư mục data: " + e.getMessage());
+            System.err.println("Không thể tạo thư mục data: " + e.getMessage());
         }
     }
 
@@ -158,7 +158,7 @@ public class JdbcAuctionRepository {
         } catch (EOFException ignored) {
             return new ArrayList<>();
         } catch (Exception e) {
-            System.err.println("[JdbcAuctionRepository] Lỗi đọc file auctions.dat: " + e.getMessage());
+            System.err.println("Lỗi đọc file auctions.dat: " + e.getMessage());
         } finally {
             lock.readLock().unlock();
         }
@@ -175,7 +175,7 @@ public class JdbcAuctionRepository {
             }
             Files.move(tmpPath, FILE_PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
         } catch (Exception e) {
-            System.err.println("[JdbcAuctionRepository] Lỗi ghi file auctions.dat: " + e.getMessage());
+            System.err.println("Lỗi ghi file auctions.dat: " + e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }

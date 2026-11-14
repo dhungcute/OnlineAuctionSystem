@@ -9,19 +9,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class JdbcAutoBidRepository {
+public class FileAutoBidRepository {
 
     private static final Path FILE_PATH = Paths.get("data", "autobids.dat");
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public JdbcAutoBidRepository() {
+    public FileAutoBidRepository() {
         try {
             Path parentDir = FILE_PATH.getParent();
             if (parentDir != null && !Files.exists(parentDir)) {
                 Files.createDirectories(parentDir);
             }
         } catch (IOException e) {
-            System.err.println("[JdbcAutoBidRepository] Không thể tạo thư mục data: " + e.getMessage());
+            System.err.println("Không thể tạo thư mục data: " + e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class JdbcAutoBidRepository {
         } catch (EOFException ignored) {
             return new ArrayList<>();
         } catch (Exception e) {
-            System.err.println("[JdbcAutoBidRepository] Lỗi đọc file autobids.dat: " + e.getMessage());
+            System.err.println("Lỗi đọc file autobids.dat: " + e.getMessage());
         } finally {
             lock.readLock().unlock();
         }
@@ -117,7 +117,7 @@ public class JdbcAutoBidRepository {
             }
             Files.move(tmpPath, FILE_PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
         } catch (Exception e) {
-            System.err.println("[JdbcAutoBidRepository] Lỗi ghi file autobids.dat: " + e.getMessage());
+            System.err.println("Lỗi ghi file autobids.dat: " + e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }

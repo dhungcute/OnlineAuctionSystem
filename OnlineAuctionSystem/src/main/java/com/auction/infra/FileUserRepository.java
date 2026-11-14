@@ -11,22 +11,22 @@ import java.util.Optional;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
-//Repository quản lý người dùng bằng Java Serialization (lưu vào file users.dat).
+//Repository class quản lý người dùng bằng Serialization (lưu vào file users.dat).
 
-public class JdbcUserRepository {
+public class FileUserRepository {
 
     // Đường dẫn lưu file dữ liệu users.dat trong thư mục ./data/
     private static final Path FILE_PATH = Paths.get("data", "users.dat");
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public JdbcUserRepository() {
+    public FileUserRepository() {
         try {
             Path parentDir = FILE_PATH.getParent();
             if (parentDir != null && !Files.exists(parentDir)) {
                 Files.createDirectories(parentDir);
             }
         } catch (IOException e) {
-            System.err.println("[JdbcUserRepository] Không thể tạo thư mục data: " + e.getMessage());
+            System.err.println("Không thể tạo thư mục data: " + e.getMessage());
         }
     }
     //Thêm mới người dùng vào file users.dat (nếu chưa trùng ID hoặc Username).
@@ -146,7 +146,7 @@ public class JdbcUserRepository {
 
             return new ArrayList<>();
         } catch (Exception e) {
-            System.err.println("[JdbcUserRepository] Lỗi khi đọc file users.dat: " + e.getMessage());
+            System.err.println("Lỗi khi đọc file users.dat: " + e.getMessage());
         } finally {
             lock.readLock().unlock();
         }
@@ -164,7 +164,7 @@ public class JdbcUserRepository {
             }
             Files.move(tmpPath, FILE_PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
         } catch (Exception e) {
-            System.err.println("[JdbcUserRepository] Lỗi khi ghi file users.dat: " + e.getMessage());
+            System.err.println("Lỗi khi ghi file users.dat: " + e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }
