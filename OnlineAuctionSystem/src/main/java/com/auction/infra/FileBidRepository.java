@@ -13,12 +13,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 //Repository quản lý lịch sử các lượt đặt giá
 
 
-public class JdbcBidRepository {
+public class FileBidRepository {
 
     private static final Path FILE_PATH = Paths.get("data", "bids.dat");
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
-    public JdbcBidRepository() {
+    public FileBidRepository() {
         // Tự động khởi tạo thư mục ./data/ nếu chưa có
         try {
             Path parentDir = FILE_PATH.getParent();
@@ -26,7 +26,7 @@ public class JdbcBidRepository {
                 Files.createDirectories(parentDir);
             }
         } catch (IOException e) {
-            System.err.println("[JdbcBidRepository] Không thể tạo thư mục data: " + e.getMessage());
+            System.err.println("Không thể tạo thư mục data: " + e.getMessage());
         }
     }
 
@@ -101,7 +101,7 @@ public class JdbcBidRepository {
         } catch (EOFException ignored) {
             return new ArrayList<>();
         } catch (Exception e) {
-            System.err.println("[JdbcBidRepository] Lỗi đọc file bids.dat: " + e.getMessage());
+            System.err.println("Lỗi đọc file bids.dat: " + e.getMessage());
         } finally {
             lock.readLock().unlock();
         }
@@ -119,7 +119,7 @@ public class JdbcBidRepository {
             }
             Files.move(tmpPath, FILE_PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
         } catch (Exception e) {
-            System.err.println("[JdbcBidRepository] Lỗi ghi file bids.dat: " + e.getMessage());
+            System.err.println("Lỗi ghi file bids.dat: " + e.getMessage());
         } finally {
             lock.writeLock().unlock();
         }
